@@ -21,6 +21,6 @@ spec:
       - name: engine
         image: battlesnakeio/engine:latest
         command: ["/bin/engine"]
-        args: [ "server", "-l", ":80", "-t", "100"]
+        args: [ "server", "-l", ":3002", "-t", "100"]
         ports:
-        - containerPort: 80
+        - containerPort: 3002

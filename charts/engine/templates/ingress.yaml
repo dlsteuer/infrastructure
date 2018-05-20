@@ -9,7 +9,7 @@ metadata:
     # Creates a lets encrypt certificate
     kubernetes.io/tls-acme: "true"
     # Defined which ingress controller we want to use when multiple are available
-    kubernetes.io/ingress.class: "engine"
+    kubernetes.io/ingress.class: "nginx"
     # Redirect all traffic to ssl
     ingress.kubernetes.io/ssl-redirect: "true"
 spec:
