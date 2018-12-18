@@ -14,7 +14,8 @@ terraform {
 
 resource "google_storage_bucket" "snakedown-snapshots" {
   name     = "snakedown-2018-snapshots-battlesnake-io"
-  region = "us-west1"
+  location = "us-west1"
+  project  = "battlesnake-io"
 }
 
 resource "google_storage_bucket_acl" "snakedown-snapshots-acl" {
