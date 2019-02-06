@@ -43,6 +43,12 @@ spec:
                       name: cloudsql-play-db-credentials
                       key: password
                       optional: false
+                - name: SENTRY_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: sentry-key
+                      key: key
+                      optional: false
                 - name: BATTLESNAKEIO_GITHUB_CLIENT_ID
                   valueFrom:
                     secretKeyRef:
@@ -93,6 +99,12 @@ spec:
                     secretKeyRef:
                       name: cloudsql-play-db-credentials
                       key: password
+                      optional: false
+                - name: SENTRY_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: sentry-key
+                      key: key
                       optional: false
                 - name: BATTLESNAKEIO_GITHUB_CLIENT_ID
                   valueFrom:
