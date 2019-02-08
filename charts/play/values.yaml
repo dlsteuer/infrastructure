@@ -1,16 +1,4 @@
 domain: battlesnake.io
 image: 
-    repository: battlesnakeio/play
-    tag: 0.1.0
-
-keel:
-    # keel policy (all/major/minor/patch/force)
-    policy: all
-    # trigger type, defaults to events such as pubsub, webhooks
-    trigger: poll
-    # polling schedule
-    pollSchedule: "@every 1m"
-    # images to track and update
-    images:
-        - repository: image.repository # it must be the same names as your app's values
-          tag: image.tag # it must be the same names as your app's values
+    repository: gcr.io/battlesnake-io/play
+    tag: 0.2.8
