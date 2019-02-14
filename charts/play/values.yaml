@@ -1,4 +1,4 @@
 domain: battlesnake.io
 image: 
     repository: gcr.io/battlesnake-io/play
-    tag: 0.2.8
+    tag: 0.2.10
