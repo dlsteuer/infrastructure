@@ -26,4 +26,5 @@ resource "google_storage_bucket" "battlesnake-games-archive" {
   name     = "battlesnake-games-archive"
   location = "us-west1"
   project  = "battlesnake-io"
+  storage_class = "REGIONAL"
 }
