@@ -13,10 +13,10 @@ resource "google_container_cluster" "battlesnake-k8s-gke" {
   region             = "${var.region}"
   project            = "${var.project}"
   min_master_version = "${var.min_master_version}"
-  logging_service    = "logging.googleapis.com"
-  monitoring_service = "monitoring.googleapis.com"
-  network            = "battlesnake"               # Network created with the network module
-  subnetwork         = "battlesnake-private"       # Subnetwork created with the network module
+  logging_service    = "logging.googleapis.com/kubernetes"
+  monitoring_service = "monitoring.googleapis.com/kubernetes"
+  network            = "${var.network_name}"               # Network created with the network module
+  subnetwork         = "${var.subnetwork_name}"            # Subnetwork created with the network module
   initial_node_count = "0"
 
   # IPs, CIDR blocks allow to connect to the cluster ( kubectl )
@@ -58,33 +58,5 @@ resource "google_container_cluster" "battlesnake-k8s-gke" {
 
   node_pool {
     name = "default-pool"
-  }
-}
-
-resource "google_container_node_pool" "battlesnake-k8s-np-01" {
-  name       = "battlesnake-k8s-np-01"
-  region     = "${var.region}"
-  project    = "${var.project}"
-  cluster    = "${google_container_cluster.battlesnake-k8s-gke.name}"
-  node_count = 1
-  version    = "${var.min_nodes_version}"
-
-  management {
-    auto_repair = true
-  }
-
-  node_config {
-    preemptible  = false
-    machine_type = "${var.machine_type}"
-    disk_size_gb = "${var.disk_size_gb}"
-    tags         = ["ssh", "k8s-nodes"]
-
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/compute",
-      "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-      "https://www.googleapis.com/auth/ndev.clouddns.readwrite",
-    ]
   }
 }

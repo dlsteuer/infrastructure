@@ -21,3 +21,11 @@ variable "disk_size_gb" {
 variable "min_nodes_version" {
   description = "The Kubernetes version for the nodes in this pool"
 }
+
+variable "network_name" {
+  
+}
+
+variable "subnetwork_name" {
+  
+}
