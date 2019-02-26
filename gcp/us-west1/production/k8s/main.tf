@@ -45,5 +45,32 @@ module "gke_node_pool_001" {
     "https://www.googleapis.com/auth/logging.write",
     "https://www.googleapis.com/auth/monitoring",
     "https://www.googleapis.com/auth/ndev.clouddns.readwrite",
+    "https://www.googleapis.com/auth/bigquery",
+  ]
+}
+
+module "gke_node_pool_002" {
+  source            = "../../../../modules/gcp/gke_node_pool"
+  name              = "battlesnake-k8s-np-002"
+  region            = "us-west1"
+  project           = "battlesnake-io"
+  gke_cluster_name  = "${module.k8s.cluster_name}"
+  node_count        = "2"
+  min_nodes_version = "1.11.5-gke.5"
+  auto_repair       = "true"
+  preemptible       = "false"
+  machine_type      = "n1-standard-2"
+  disk_size_gb      = "64"
+  tags              = [
+    "ssh", 
+    "k8s-nodes",
+  ]
+  oauth_scopes      = [
+    "https://www.googleapis.com/auth/compute",
+    "https://www.googleapis.com/auth/devstorage.read_write",
+    "https://www.googleapis.com/auth/logging.write",
+    "https://www.googleapis.com/auth/monitoring",
+    "https://www.googleapis.com/auth/ndev.clouddns.readwrite",
+    "https://www.googleapis.com/auth/bigquery",
   ]
 }

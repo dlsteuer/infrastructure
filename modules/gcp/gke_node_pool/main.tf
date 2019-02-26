@@ -18,8 +18,4 @@ resource "google_container_node_pool" "default" {
 
     oauth_scopes = "${var.oauth_scopes}"
   }
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
