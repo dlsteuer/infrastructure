@@ -2,7 +2,6 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: engine
-  namespace: default
   labels:
     app: engine
 spec:
@@ -25,7 +24,7 @@ spec:
         image: battlesnakeio/engine:{{ .Values.release }}
         env:
         - name: POSTGRES_HOST
-          value: "sqlproxy-engine-gcloud-sqlproxy"
+          value: "sqlproxy-engine-gcloud-sqlproxy.default.svc.cluster.local"
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
@@ -70,7 +69,6 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: engine-worker
-  namespace: default
   labels:
     app: engine-worker
 spec:

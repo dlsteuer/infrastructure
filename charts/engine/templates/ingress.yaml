@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: engine
-  namespace: default
   annotations:
     # Creates a dns entry
     external-dns.alpha.kubernetes.io/hostname: engine.{{ .Values.domain }}.
