@@ -1,2 +1,4 @@
 domain: battlesnake.io
-release: 0.2.14
+release: 0.2.16
+postgres_host: sqlproxy-engine-gcloud-sqlproxy.default.svc.cluster.local
+cloudsql_secret_credentials: cloudsql-engine-db-credentials

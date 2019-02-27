@@ -27,7 +27,7 @@ spec:
         image: battlesnakeio/engine:{{ .Values.release }}
         env:
         - name: POSTGRES_HOST
-          value: "sqlproxy-engine-gcloud-sqlproxy.default.svc.cluster.local"
+          value: {{ .Values.postrges_host }}
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
@@ -35,13 +35,13 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: cloudsql-engine-db-credentials
+              name: {{ .Values.cloudsql_secret_credentials }}
               key: username
               optional: false
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: cloudsql-engine-db-credentials
+              name: {{ .Values.cloudsql_secret_credentials }}
               key: password
               optional: false
         command: ["/bin/engine"]
