@@ -26,7 +26,7 @@ data "terraform_remote_state" "sql-tournament" {
 resource "kubernetes_secret" "cloudsql-engine-tournament-instance-credentials" {
   metadata {
     name               = "cloudsql-engine-tournament-instance-credentials"
-    namespace          = "default"
+    namespace          = "engine-tournament"
   }
   data {
     "credentials.json" = "${base64decode(data.terraform_remote_state.sql-tournament.cloudsqlproxy-engine-tournament-service-account-private-key)}"
@@ -36,7 +36,7 @@ resource "kubernetes_secret" "cloudsql-engine-tournament-instance-credentials" {
 resource "kubernetes_secret" "cloudsql-engine-tournament-db-credentials" {
   metadata {
     name       = "cloudsql-engine-tournament-db-credentials"
-    namespace  = "default"
+    namespace  = "engine-tournament"
   }
   data {
     username   = "${data.terraform_remote_state.sql-tournament.db_user_name_engine_tournament}"
@@ -47,7 +47,7 @@ resource "kubernetes_secret" "cloudsql-engine-tournament-db-credentials" {
 resource "kubernetes_secret" "cloudsql-engine-tournament-db-config" {
   metadata {
     name              = "cloudsql-engine-tournament-db-config"
-    namespace         = "default"
+    namespace         = "engine-tournament"
   }
   data {
     connection_name   = "${data.terraform_remote_state.sql-tournament.connection_name_engine_tournament}"
