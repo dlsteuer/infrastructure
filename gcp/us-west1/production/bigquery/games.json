@@ -1,0 +1,27 @@
+[
+  {
+    "name": "engine_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "turns",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "winning_snake_length",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "avg_food",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "created",
+    "type": "DATETIME",
+    "mode": "NULLABLE"
+  }
+]

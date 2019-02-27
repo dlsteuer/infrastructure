@@ -1,0 +1,27 @@
+[
+  {
+    "name": "engine_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "turn",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "death_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "length",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "created",
+    "type": "DATETIME",
+    "mode": "NULLABLE"
+  }
+]
