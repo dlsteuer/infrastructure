@@ -1,16 +1,38 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: engine
+  name: engine-api
 spec:
   selector:
-    app: engine
+    app: engine-api
   ports:
     - name: http
       protocol: 'TCP'
       port: 80
       targetPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: engine-controller
+spec:
+  selector:
+    app: engine-controller
+  ports:
     - name: controller
       protocol: 'TCP'
-      port: 3004
-      targetPort: 3004
+      port: 3002
+      targetPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: engine-socket
+spec:
+  selector:
+    app: engine-socket
+  ports:
+    - name: http
+      protocol: 'TCP'
+      port: 80
+      targetPort: 3002

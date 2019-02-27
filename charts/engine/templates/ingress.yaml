@@ -22,5 +22,9 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: engine
+          serviceName: engine-api
+          servicePort: 80
+      - path: /socket
+        backend:
+          serviceName: engine-socket
           servicePort: 80

@@ -1,11 +1,11 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: engine
+  name: engine-controller
   labels:
-    app: engine
+    app: engine-controller
 spec:
-  replicas: 4
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -13,11 +13,14 @@ spec:
       maxSurge: 2
   selector:
     matchLabels:
-      app: engine
+      app: engine-controller
   template:
     metadata:
+      annotations:
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
       labels:
-        app: engine
+        app: engine-controller
     spec:
       containers:
       - name: engine
@@ -45,10 +48,9 @@ spec:
         args:
           [
             "server",
+            "controller",
             "-l",
             ":3002",
-            "-t",
-            "1",
             "-b",
             "sql",
             "-a",
@@ -63,7 +65,96 @@ spec:
             memory: 500M
         ports:
           - containerPort: 3002
-          - containerPort: 3004
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: engine-api
+  labels:
+    app: engine-api
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: engine-api
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+      labels:
+        app: engine-api
+    spec:
+      containers:
+      - name: engine
+        image: battlesnakeio/engine:{{ .Values.release }}
+        command: ["/bin/engine"]
+        args:
+          [
+            "server",
+            "api",
+            "-l",
+            ":3002",
+            "-c",
+            "engine-controller:3002",
+          ]
+      resources:
+        limits:
+          cpu: "1"
+          memory: 750M
+        requests:
+          cpu: "0.5"
+          memory: 500M
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: engine-socket
+  labels:
+    app: engine-socket
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: engine-socket
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+      labels:
+        app: engine-socket
+    spec:
+      containers:
+      - name: engine
+        image: battlesnakeio/engine:{{ .Values.release }}
+        command: ["/bin/engine"]
+        args:
+          [
+            "server",
+            "api",
+            "-l",
+            ":3002",
+            "-c",
+            "engine-controller:3002",
+          ]
+      resources:
+        limits:
+          cpu: "1"
+          memory: 750M
+        requests:
+          cpu: "0.5"
+          memory: 500M
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -83,6 +174,9 @@ spec:
       app: engine-worker
   template:
     metadata:
+      annotations:
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
       labels:
         app: engine-worker
     spec:
@@ -95,7 +189,7 @@ spec:
             "server",
             "worker",
             "-c",
-            "engine:3004",
+            "engine-controller:3002",
             "-t",
             "50",
           ]
