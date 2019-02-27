@@ -82,7 +82,7 @@ spec:
       maxSurge: 2
   selector:
     matchLabels:
-      app: engine-controller
+      app: engine-api
   template:
     metadata:
       annotations:
