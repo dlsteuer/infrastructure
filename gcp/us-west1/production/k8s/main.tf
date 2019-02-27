@@ -29,11 +29,11 @@ module "gke_node_pool_001" {
   region            = "us-west1"
   project           = "battlesnake-io"
   gke_cluster_name  = "${module.k8s.cluster_name}"
-  node_count        = "2"
+  node_count        = "1"
   min_nodes_version = "1.11.5-gke.5"
   auto_repair       = "true"
   preemptible       = "false"
-  machine_type      = "n1-standard-2"
+  machine_type      = "n1-highcpu-16"
   disk_size_gb      = "64"
   tags              = [
     "ssh", 
@@ -55,11 +55,11 @@ module "gke_node_pool_002" {
   region            = "us-west1"
   project           = "battlesnake-io"
   gke_cluster_name  = "${module.k8s.cluster_name}"
-  node_count        = "2"
+  node_count        = "1"
   min_nodes_version = "1.11.5-gke.5"
   auto_repair       = "true"
   preemptible       = "false"
-  machine_type      = "n1-standard-2"
+  machine_type      = "n1-highcpu-16"
   disk_size_gb      = "64"
   tags              = [
     "ssh", 
