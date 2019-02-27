@@ -1,5 +1,5 @@
-resource "google_project_iam_binding" "main" {
+resource "google_project_iam_member" "main" {
   project            = "${var.project}"
   role               = "${var.role}"
-  members            = ["${var.members}"]
+  member            = "${var.member}"
 }

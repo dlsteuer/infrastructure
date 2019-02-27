@@ -58,7 +58,7 @@ module "cloudsqlproxy-engine-binding-cloudsql-client" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.client"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
 }
 
 module "cloudsqlproxy-engine-binding-cloudsql-editor" {
@@ -67,7 +67,7 @@ module "cloudsqlproxy-engine-binding-cloudsql-editor" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.editor"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
 }
 
 module "cloudsqlproxy-engine-binding-cloudsql-admin" {
@@ -76,5 +76,5 @@ module "cloudsqlproxy-engine-binding-cloudsql-admin" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.admin"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
 }

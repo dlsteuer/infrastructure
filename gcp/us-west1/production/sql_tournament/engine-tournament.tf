@@ -61,7 +61,7 @@ module "cloudsqlproxy-engine-tournament-binding-cloudsql-client" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.client"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
 
 module "cloudsqlproxy-engine-tournament-binding-cloudsql-editor" {
@@ -70,7 +70,7 @@ module "cloudsqlproxy-engine-tournament-binding-cloudsql-editor" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.editor"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
 
 module "cloudsqlproxy-engine-tournament-binding-cloudsql-admin" {
@@ -79,5 +79,5 @@ module "cloudsqlproxy-engine-tournament-binding-cloudsql-admin" {
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.admin"
-  members               = ["serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"]
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
