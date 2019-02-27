@@ -12,6 +12,9 @@ module "postgresql-engine-tournament" {
   disk_autoresize             = "true"
   disk_size                   = "100"
   disk_type                   = "PD_SSD"
+  ip_configuration            = [{
+    ipv4_enabled  = "true"
+  }]
   backup_configuration        = [{
     enabled = "true"
     start_time = "00:00"
