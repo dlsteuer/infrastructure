@@ -65,7 +65,6 @@ spec:
             memory: 500M
         ports:
           - containerPort: 3002
-          - containerPort: 3004
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -99,8 +98,10 @@ spec:
           [
             "server",
             "api",
+            "-l",
+            ":3002",
             "-c",
-            "engine-controller:3004",
+            "engine-controller:3002",
           ]
       resources:
         limits:
@@ -142,8 +143,10 @@ spec:
           [
             "server",
             "api",
+            "-l",
+            ":3002",
             "-c",
-            "engine-controller:3004",
+            "engine-controller:3002",
           ]
       resources:
         limits:
@@ -186,7 +189,7 @@ spec:
             "server",
             "worker",
             "-c",
-            "engine-controller:3004",
+            "engine-controller:3002",
             "-t",
             "50",
           ]
