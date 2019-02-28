@@ -27,7 +27,7 @@ spec:
         image: battlesnakeio/engine:{{ .Values.release }}
         env:
         - name: POSTGRES_HOST
-          value: {{ .Values.postrges_host }}
+          value: {{ .Values.postgres_host }}
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
