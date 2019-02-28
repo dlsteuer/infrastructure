@@ -1,8 +1,8 @@
 variable "role" {
 
 }
-variable "members" {
-    type = "list"
+variable "member" {
+
 }
 variable "project" {
   

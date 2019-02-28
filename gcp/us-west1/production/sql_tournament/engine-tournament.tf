@@ -1,17 +1,20 @@
-module "postgresql-engine" {
+module "postgresql-engine-tournament" {
   source                      = "../../../../modules/gcp/sql"
 
   project                     = "battlesnake-io"
 
-  name                        = "battlesnake-engine"
+  name                        = "battlesnake-engine-tournament"
   database_version            = "POSTGRES_9_6"
   region                      = "us-west1"
-  tier                        = "db-custom-2-8192" # 2 CPU, 8GB ram
+  tier                        = "db-custom-16-65536" # 16 CPU, 64GB ram
   activation_policy           = "ALWAYS"
   availability_type           = "REGIONAL"
   disk_autoresize             = "true"
   disk_size                   = "100"
   disk_type                   = "PD_SSD"
+  ip_configuration            = [{
+    ipv4_enabled  = "true"
+  }]
   backup_configuration        = [{
     enabled = "true"
     start_time = "00:00"
@@ -28,53 +31,53 @@ module "postgresql-engine" {
 
 }
 
-module "db-user-engine" {
+module "db-user-engine-tournament" {
   source    = "../../../../modules/gcp/sql_user"
 
   project   = "battlesnake-io"
 
   user_name = "proxyuser"
-  instance = "${module.postgresql-engine.instance_name}"
+  instance = "${module.postgresql-engine-tournament.instance_name}"
   
 }
 
-module "cloudsqlproxy-engine-service-account" {
+module "cloudsqlproxy-engine-tournament-service-account" {
   source        = "../../../../modules/gcp/service_account"
   
-  account_id    = "cloudsqlproxy-engine"
-  display_name  = "cloudsqlproxy-engine"
+  account_id    = "cloudsqlproxy-enginetournament"
+  display_name  = "cloudsqlproxy-enginetournament"
   project       = "battlesnake-io"
 }
 
-module "cloudsqlproxy-engine-service-account-key" {
+module "cloudsqlproxy-engine-tournament-service-account-key" {
   source = "../../../../modules/gcp/service_account_key"
 
-  service_account_id = "${module.cloudsqlproxy-engine-service-account.name}"
+  service_account_id = "${module.cloudsqlproxy-engine-tournament-service-account.name}"
 }
 
-module "cloudsqlproxy-engine-binding-cloudsql-client" {
+module "cloudsqlproxy-engine-tournament-binding-cloudsql-client" {
   source                = "../../../../modules/gcp/project_iam_binding"
 
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.client"
-  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
 
-module "cloudsqlproxy-engine-binding-cloudsql-editor" {
+module "cloudsqlproxy-engine-tournament-binding-cloudsql-editor" {
   source                = "../../../../modules/gcp/project_iam_binding"
   
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.editor"
-  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
 
-module "cloudsqlproxy-engine-binding-cloudsql-admin" {
+module "cloudsqlproxy-engine-tournament-binding-cloudsql-admin" {
   source                = "../../../../modules/gcp/project_iam_binding"
 
   project               = "battlesnake-io"
 
   role                  = "roles/cloudsql.admin"
-  member                = "serviceAccount:${module.cloudsqlproxy-engine-service-account.email}"
+  member                = "serviceAccount:${module.cloudsqlproxy-engine-tournament-service-account.email}"
 }
