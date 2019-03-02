@@ -40,11 +40,11 @@ spec:
         image: battlesnakeio/board:{{ .Values.release }}
         ports:
         - containerPort: 80
-      resources:
-        limits:
-          cpu: "0.5"
-          memory: 500M
-        requests:
-          cpu: "0.5"
-          memory: 500M
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1000M
+          requests:
+            cpu: "0.5"
+            memory: 500M
 

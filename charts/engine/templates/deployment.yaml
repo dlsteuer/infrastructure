@@ -58,8 +58,8 @@ spec:
           ]
         resources:
           limits:
-            cpu: "1"
-            memory: 750M
+            cpu: "2"
+            memory: 1000M
           requests:
             cpu: "0.5"
             memory: 500M
@@ -103,13 +103,13 @@ spec:
             "-c",
             "engine-controller:3002",
           ]
-      resources:
-        limits:
-          cpu: "1"
-          memory: 750M
-        requests:
-          cpu: "0.5"
-          memory: 500M
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1000M
+          requests:
+            cpu: "0.5"
+            memory: 500M
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -148,13 +148,13 @@ spec:
             "-c",
             "engine-controller:3002",
           ]
-      resources:
-        limits:
-          cpu: "1"
-          memory: 750M
-        requests:
-          cpu: "0.5"
-          memory: 500M
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1000M
+          requests:
+            cpu: "0.5"
+            memory: 500M
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -193,10 +193,10 @@ spec:
             "-t",
             "50",
           ]
-      resources:
-        limits:
-          cpu: "1"
-          memory: 750M
-        requests:
-          cpu: "0.5"
-          memory: 500M
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1000M
+          requests:
+            cpu: "0.5"
+            memory: 500M
