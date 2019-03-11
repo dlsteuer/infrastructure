@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: metabase
+  labels:
+    app: metabase
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: metabase
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+      labels:
+        app: metabase
+    spec:
+      containers:
+      - name: metabase
+        image: metabase/metabase
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1000M
+          requests:
+            cpu: "0.5"
+            memory: 500M
+        ports:
+          - containerPort: 3000

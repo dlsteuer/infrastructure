@@ -23,5 +23,20 @@
     "name": "created",
     "type": "DATETIME",
     "mode": "NULLABLE"
+  },
+  {
+    "name": "engine_url",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "snake_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "tournament_bracket",
+    "type": "STRING",
+    "mode": "NULLABLE"
   }
 ]
